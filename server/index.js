@@ -2,28 +2,31 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 
-import connectDB from './mongodb/connect.js';
+import connectDB from './mongoDB/config.js'
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json({limit:'50mb'}));
 
-//Asegurarnos de que el server esta ejecutandose bien
-app.get('/', async(req,res)=>{
-  res.send('Hello from NebuLabs image-generator');
+
+//Probando el server
+app.get('/',async (req,res)=>{
+  res.status(200).json({
+    message: 'Hello from Nebulabs AI',
+  });
 });
 
-
-//Corriendo el puerto
-const startServer = async()=>{
+const startServer = async () =>{
   try{
     connectDB(process.env.MONGODB_URL);
-    app.listen(8080, ()=> console.log('Server running in port 8080'))
+    app.listen(process.env.PORT, () =>{
+      console.log(`Port running in ${process.env.PORT}`);
+    })
+
   }catch(err){
     console.log(err);
   }
-};
+}
 
 startServer();
