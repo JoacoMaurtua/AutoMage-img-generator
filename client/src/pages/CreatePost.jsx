@@ -5,6 +5,8 @@ import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components';
 
+import axios from 'axios';
+
 const CreatePost = () => {
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -21,15 +23,13 @@ const CreatePost = () => {
         if (form.prompt) {
             try {
                 setGeneratingImg(true);
-                const response = await fetch('http://localhost:8080/api/v1/dalle', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prompt: form.prompt }),
-                });
+                const response = await axios.post(
+                    'http://localhost:8080/api/v1/dalle',
+                    { prompt: form.prompt },
+                    { headers: { 'Content-Type': 'application/json' } }
+                );
 
-                const data = await response.json();
+                const data = response.data;
 
                 setForm({ ...form, photo: `data:image/jpeg;base64, ${data.photo}` });
             } catch (err) {
