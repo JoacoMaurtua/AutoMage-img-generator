@@ -19,7 +19,7 @@ const Card = ({_id, name, prompt, photo}) => {
           </p>
           <div className="mt-5 flex justify-between item-center gap-2">
             <div className='flex items-center gap-2'>
-              <div className="w-7 h-7 rounded-full object-cover bg-green-700
+              <div className="w-7 h-7 rounded-full object-cover bg-[#BDA2FF]
                 flex justify-center items-center text-white text-xs font-bold">
                   {name[0]}
               </div>

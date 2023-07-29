@@ -21,7 +21,7 @@ router.get('/', (req,res)=>{
   res.send('Hello from DALL-E')
 })
 
-//Crear una imagen
+//Crear una imagen a partir de un texto
 router.route('/').post(async (req,res)=>{
   try{
     const {prompt} = req.body;
@@ -42,6 +42,12 @@ router.route('/').post(async (req,res)=>{
     res.status(500).send(error?.response.data.error.message)
   }
 });
+
+//Editar una imagen a partir de una imagen ya generada
+
+
+
+//Crear una imagen a partir de una imagen
 
 
 export default router;
